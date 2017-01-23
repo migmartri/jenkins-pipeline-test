@@ -1,12 +1,14 @@
+// vi: ft=groovy
 node { // <1>
     stage('Build') {
       checkout scm
       sh 'ls -l'
     }
     stage('Test') {
-        /* .. snip .. */
+      // Will fail
+      foobar
     }
     stage('Deploy') {
-        /* .. snip .. */
+      echo "I am deploying"
     }
 }
