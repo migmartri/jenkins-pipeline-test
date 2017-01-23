@@ -13,7 +13,7 @@ stage('Test') {
           try {
               unstash 'app'
               sh 'ls -l'
-              sh 'sleep 7'
+              sh 'sleep 10'
           }
           finally {
             echo 'Finished tests in linux'
@@ -27,7 +27,7 @@ stage('Test') {
               unstash 'app'
               echo "In windows"
               sh 'ls -l'
-              sh 'sleep 5'
+              sh 'sleep 8'
           }
           finally {
             echo 'Finished tests in windows'
