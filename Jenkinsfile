@@ -7,25 +7,30 @@ stage('Build') {
   }
 }
 stage('Test') {
-    node('linux') {
-        checkout scm
-        try {
-            unstash 'app'
-            sh 'ls -l'
-        }
-        finally {
-          echo 'Finished tests in linux'
-        }
-    }
-    node('windows') {
-        checkout scm
-        try {
-            unstash 'app'
-            echo "In windows"
-            sh 'ls -l'
-        }
-        finally {
-          echo 'Finished tests in windows'
-        }
+    parallel linux: {
+      node('linux') {
+          checkout scm
+          try {
+              unstash 'app'
+              sh 'ls -l'
+              sh 'sleep 4'
+          }
+          finally {
+            echo 'Finished tests in linux'
+          }
+      }
+    },
+    windows: {
+      node('windows') {
+          checkout scm
+          try {
+              unstash 'app'
+              echo "In windows"
+              sh 'ls -l'
+          }
+          finally {
+            echo 'Finished tests in windows'
+          }
+      }
     }
 }
