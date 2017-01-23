@@ -5,8 +5,7 @@ node { // <1>
       sh 'ls -l'
     }
     stage('Test') {
-      // Will fail
-      foobar
+      echo 'Test!'
     }
     stage('Deploy') {
       echo "I am deploying"
