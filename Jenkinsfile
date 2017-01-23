@@ -13,6 +13,9 @@ stage('Test') {
             unstash 'app'
             sh 'ls -l'
         }
+        finally {
+          echo 'Finished tests in linux'
+        }
     }
     node('windows') {
         checkout scm
@@ -20,6 +23,9 @@ stage('Test') {
             unstash 'app'
             echo "In windows"
             sh 'ls -l'
+        }
+        finally {
+          echo 'Finished tests in windows'
         }
     }
 }
