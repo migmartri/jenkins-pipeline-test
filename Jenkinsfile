@@ -1,7 +1,7 @@
 // vi: ft=groovy
 stage('Build') {
   node('linux') {
-    echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+    echo "Running ${env.BUILD_ID} on branch ${env.BRANCH_NAME}"
     checkout scm
     stash includes: '*', name: 'app'
   }
