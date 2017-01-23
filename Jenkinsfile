@@ -1,3 +1,3 @@
 node {
-  echo "Hello from JenkinsFile"
+  echo "Hello from JenkinsFile $JOB_URL"
 }
