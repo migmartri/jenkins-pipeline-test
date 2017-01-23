@@ -1,6 +1,7 @@
 node { // <1>
-    stage('Build') { // <2>
-        /* .. snip .. */
+    stage('Build') {
+      checkout scm
+      sh 'ls -l'
     }
     stage('Test') {
         /* .. snip .. */
