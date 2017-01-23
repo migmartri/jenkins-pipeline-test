@@ -1,14 +1,31 @@
 // vi: ft=groovy
-node { // <1>
-    stage('Build') {
-      echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-      checkout scm
-      sh 'ls -l'
+stage('Build') {
+  node('linux') {
+    echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+    checkout scm
+    stash includes: '*', name: 'app'
+  }
+}
+stage('Test') {
+    node('linux') {
+        checkout scm
+        try {
+            unstash 'app'
+            sh 'ls -l'
+        }
+        finally {
+            junit '**/target/*.xml'
+        }
     }
-    stage('Test') {
-      echo 'Test!'
-    }
-    stage('Deploy') {
-      echo "I am deploying"
+    node('windows') {
+        checkout scm
+        try {
+            unstash 'app'
+            echo "In windows"
+            sh 'ls -l'
+        }
+        finally {
+            junit '**/target/*.xml'
+        }
     }
 }
