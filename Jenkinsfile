@@ -1,4 +1,3 @@
 node {
-  echo "Hello from JenkinsFile"
-  sh "echo $JOB_URL"
+  echo "Hello from JenkinsFile ${env.JOB_URL}"
 }
