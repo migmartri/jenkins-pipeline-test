@@ -1,3 +1,11 @@
-node {
-  echo "Hello from JenkinsFile ${env.JOB_URL}"
+node { // <1>
+    stage('Build') { // <2>
+        /* .. snip .. */
+    }
+    stage('Test') {
+        /* .. snip .. */
+    }
+    stage('Deploy') {
+        /* .. snip .. */
+    }
 }
