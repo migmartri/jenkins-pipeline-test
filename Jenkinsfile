@@ -13,9 +13,6 @@ stage('Test') {
             unstash 'app'
             sh 'ls -l'
         }
-        finally {
-            junit '**/target/*.xml'
-        }
     }
     node('windows') {
         checkout scm
@@ -23,9 +20,6 @@ stage('Test') {
             unstash 'app'
             echo "In windows"
             sh 'ls -l'
-        }
-        finally {
-            junit '**/target/*.xml'
         }
     }
 }
