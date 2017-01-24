@@ -1,14 +1,14 @@
 // vi: ft=groovy
 stage('Build') {
-  node('linux') {
+  node {
     echo "Running ${env.BUILD_ID} on branch ${env.BRANCH_NAME}"
     checkout scm
     stash includes: '*', name: 'app'
   }
 }
 stage('Test') {
-    parallel linux: {
-      node('linux') {
+    parallel branch_1: {
+      node {
           checkout scm
           try {
               unstash 'app'
@@ -20,8 +20,8 @@ stage('Test') {
           }
       }
     },
-    windows: {
-      node('windows') {
+    branch_2: {
+      node {
           checkout scm
           try {
               unstash 'app'
